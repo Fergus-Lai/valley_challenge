@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:valley_challenge/pages/components/dev_checkbox.dart';
 
 class DataPage extends StatefulWidget {
   const DataPage({super.key});
@@ -13,6 +14,12 @@ class DataPageState extends State<DataPage> {
   final nameController = TextEditingController();
   bool developer = true;
   String? nameError;
+
+  void onChanged(bool isDev) {
+    setState(() {
+      developer = isDev;
+    });
+  }
 
   Future<void> confirmPressed() async {
     FirebaseFirestore.instance
@@ -56,29 +63,7 @@ class DataPageState extends State<DataPage> {
                     errorText: nameError),
               ),
               const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Row(
-                    children: [
-                      Checkbox(
-                          value: developer,
-                          onChanged: (_) => setState(() {
-                                developer = true;
-                              })),
-                      const Text("Developer")
-                    ],
-                  ),
-                  Row(children: [
-                    Checkbox(
-                        value: !developer,
-                        onChanged: (_) => setState(() {
-                              developer = false;
-                            })),
-                    const Text("Founder")
-                  ])
-                ],
-              ),
+              DevCheckBox(developer: developer, onChanged: onChanged),
               const SizedBox(height: 8),
               ElevatedButton(
                   style: ButtonStyle(

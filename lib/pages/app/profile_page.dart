@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:valley_challenge/pages/components/dev_checkbox.dart';
 
 class ProfilePage extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> user;
@@ -15,6 +16,15 @@ class ProfilePageState extends State<ProfilePage> {
       TextEditingController(text: widget.user.data()?["name"]);
   bool nameEdit = false;
   String? nameError;
+  bool developer = true;
+
+  Future<void> onChanged(bool isDev) async {
+    setState(() {
+      developer = isDev;
+    });
+    await widget.user.reference
+        .update({"role": developer ? "developer" : "founder"});
+  }
 
   Future<void> nameButtonPressed() async {
     if (nameEdit) {
@@ -62,7 +72,8 @@ class ProfilePageState extends State<ProfilePage> {
                   onPressed: nameButtonPressed,
                   child: Icon(nameEdit ? Icons.save : Icons.edit, size: 40))
             ],
-          )
+          ),
+          DevCheckBox(developer: developer, onChanged: onChanged)
         ],
       ),
     ));
