@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "524984839648",
+    "project_id": "valleychallenge-257dc",
+    "storage_bucket": "valleychallenge-257dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524984839648:android:90605b6d8cf8a55d418f85",
+        "android_client_info": {
+          "package_name": "com.example.valley_challenge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvDVwrCNZGLKxvswai0aQT8IPCHYCAxmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
