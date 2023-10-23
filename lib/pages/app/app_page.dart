@@ -18,7 +18,7 @@ class AppPage extends StatelessWidget {
         builder: (context,
             AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.hasData && snapshot.data!.exists) {
-            return const NavPage();
+            return NavPage(user: snapshot.data!);
           } else {
             return const DataPage();
           }
