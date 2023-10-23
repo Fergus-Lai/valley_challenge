@@ -1,11 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   final Function() onTap;
-  LoginPage({super.key, required this.onTap});
+  const LoginPage({super.key, required this.onTap});
 
   @override
   State<LoginPage> createState() => LoginPageState();
@@ -56,7 +54,7 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Center(
         child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -67,33 +65,34 @@ class LoginPageState extends State<LoginPage> {
                   onSubmitted: (_) => setState(() {}),
                   onTap: () => setEmailError(null),
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                       label: const Text("Email"),
                       errorText: emailError),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   obscureText: true,
                   controller: passwordController,
                   onSubmitted: (_) => setState(() {}),
                   onTap: () => setPasswordError(null),
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     label: const Text("Password"),
                     errorText: passwordError,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextButton(
                     onPressed: widget.onTap,
                     child: const Text("Create an Account")),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: disabled()
-                          ? MaterialStatePropertyAll(Colors.grey)
-                          : MaterialStatePropertyAll(Colors.purple),
-                      foregroundColor: MaterialStatePropertyAll(Colors.white)),
+                          ? const MaterialStatePropertyAll(Colors.grey)
+                          : const MaterialStatePropertyAll(Colors.purple),
+                      foregroundColor:
+                          const MaterialStatePropertyAll(Colors.white)),
                   onPressed: disabled() ? null : signIn,
                   child: const Text("Sign In"),
                 ),

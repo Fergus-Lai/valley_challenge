@@ -8,7 +8,7 @@ class SignUpException implements Exception {
 
 class SignupPage extends StatefulWidget {
   final Function() onTap;
-  SignupPage({super.key, required this.onTap});
+  const SignupPage({super.key, required this.onTap});
 
   @override
   State<SignupPage> createState() => SignupPageState();
@@ -81,7 +81,7 @@ class SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Center(
         child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -92,11 +92,11 @@ class SignupPageState extends State<SignupPage> {
                   onSubmitted: (_) => setState(() {}),
                   onTap: () => setEmailError(null),
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                       label: const Text("Email"),
                       errorText: emailError),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   obscureText: true,
                   controller: passwordController,
@@ -113,12 +113,12 @@ class SignupPageState extends State<SignupPage> {
                     setConfirmPasswordError(null);
                   },
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     label: const Text("Password"),
                     errorText: passwordError,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   obscureText: true,
                   controller: confirmPasswordController,
@@ -132,22 +132,23 @@ class SignupPageState extends State<SignupPage> {
                   },
                   onTap: () => setConfirmPasswordError(null),
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     label: const Text("Confirm Password"),
                     errorText: confirmPasswordError,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextButton(
                     onPressed: widget.onTap,
                     child: const Text("Create an Account")),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: disabled()
-                          ? MaterialStatePropertyAll(Colors.grey)
-                          : MaterialStatePropertyAll(Colors.purple),
-                      foregroundColor: MaterialStatePropertyAll(Colors.white)),
+                          ? const MaterialStatePropertyAll(Colors.grey)
+                          : const MaterialStatePropertyAll(Colors.purple),
+                      foregroundColor:
+                          const MaterialStatePropertyAll(Colors.white)),
                   onPressed: disabled() ? null : signUp,
                   child: const Text("Sign Up"),
                 ),
