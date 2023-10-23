@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:valley_challenge/pages/login_signup_page.dart';
 
 class AuthPage extends StatelessWidget {
   AuthPage({super.key});
@@ -13,7 +14,7 @@ class AuthPage extends StatelessWidget {
         if (snapshot.hasData) {
           return Center(child: Text("Authed"));
         } else {
-          return Center(child: Text("Unauthed"));
+          return LoginSignupPage();
         }
       },
     ));
