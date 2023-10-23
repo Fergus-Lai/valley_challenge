@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:valley_challenge/pages/app/data_page.dart';
+import 'package:valley_challenge/pages/app/nav_page.dart';
 
 class AppPage extends StatelessWidget {
   const AppPage({super.key});
@@ -17,9 +18,7 @@ class AppPage extends StatelessWidget {
         builder: (context,
             AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.hasData && snapshot.data!.exists) {
-            return const Center(
-              child: (Text("Has Data")),
-            );
+            return const NavPage();
           } else {
             return const DataPage();
           }
