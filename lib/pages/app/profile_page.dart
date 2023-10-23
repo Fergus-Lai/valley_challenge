@@ -73,7 +73,13 @@ class ProfilePageState extends State<ProfilePage> {
                   child: Icon(nameEdit ? Icons.save : Icons.edit, size: 40))
             ],
           ),
-          DevCheckBox(developer: developer, onChanged: onChanged)
+          DevCheckBox(developer: developer, onChanged: onChanged),
+          ElevatedButton(
+              style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Colors.purple),
+                  foregroundColor: MaterialStatePropertyAll(Colors.white)),
+              onPressed: FirebaseAuth.instance.signOut,
+              child: const Text("Sign Out"))
         ],
       ),
     ));

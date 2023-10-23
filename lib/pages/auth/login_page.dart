@@ -42,7 +42,8 @@ class LoginPageState extends State<LoginPage> {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         setEmailError("User Not Found");
-      } else if (e.code == 'wrong-password') {
+      } else if (e.code == 'wrong-password' ||
+          e.code == "INVALID_LOGIN_CREDENTIALS") {
         setPasswordError("Incorrect Password");
       } else if (e.code == "invalid-email") {
         setEmailError("Invalid Email");
