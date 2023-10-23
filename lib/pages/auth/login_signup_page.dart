@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:valley_challenge/pages/login_page.dart';
-import 'package:valley_challenge/pages/signup_page.dart';
+import 'package:valley_challenge/pages/auth/login_page.dart';
+import 'package:valley_challenge/pages/auth/signup_page.dart';
 
 class LoginSignupPage extends StatefulWidget {
   const LoginSignupPage({super.key});
