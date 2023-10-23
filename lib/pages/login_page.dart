@@ -14,7 +14,6 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  bool remember = true;
   bool submitted = false;
   String? emailError;
   String? passwordError;
