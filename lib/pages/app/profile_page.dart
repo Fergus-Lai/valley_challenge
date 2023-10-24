@@ -16,7 +16,7 @@ class ProfilePageState extends State<ProfilePage> {
       TextEditingController(text: widget.user.data()?["name"]);
   bool nameEdit = false;
   String? nameError;
-  bool developer = true;
+  late bool developer = widget.user.data()?["role"] == "developer";
 
   Future<void> onChanged(bool isDev) async {
     setState(() {
@@ -50,6 +50,10 @@ class ProfilePageState extends State<ProfilePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text(
+            "Welcome Back ${developer ? "Developer" : "Founder"}",
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
           Row(
             children: [
               Flexible(
