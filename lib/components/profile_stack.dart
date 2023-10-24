@@ -13,6 +13,7 @@ class _ProfileStackState extends State<ProfileStack> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> profiles = widget.data;
+    profiles.shuffle();
     return Stack(
       children: profiles
           .map((profile) => ProfileCard(
