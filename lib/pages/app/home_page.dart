@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:valley_challenge/pages/components/profile_stack.dart';
+import 'package:valley_challenge/components/profile_stack.dart';
 
 class HomePage extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> user;

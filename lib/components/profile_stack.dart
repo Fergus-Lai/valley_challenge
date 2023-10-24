@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:valley_challenge/pages/components/profile_card.dart";
+import 'package:valley_challenge/components/profile_card.dart';
 
 class ProfileStack extends StatefulWidget {
   final List<Map<String, dynamic>> data;

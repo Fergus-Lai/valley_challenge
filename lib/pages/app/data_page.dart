@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:valley_challenge/pages/components/dev_checkbox.dart';
+import 'package:valley_challenge/components/dev_checkbox.dart';
 
 class DataPage extends StatefulWidget {
   const DataPage({super.key});

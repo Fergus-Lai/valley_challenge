@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:valley_challenge/pages/components/swipe_card.dart';
+import 'package:valley_challenge/components/swipe_card.dart';
 
 class SwipeWidget extends StatefulWidget {
   final Future<void> Function(bool) onSlided;

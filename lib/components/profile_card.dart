@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import "package:valley_challenge/pages/components/swipe_card.dart";
-import "package:valley_challenge/pages/components/swipe_widget.dart";
+import 'package:valley_challenge/components/swipe_card.dart';
+import 'package:valley_challenge/components/swipe_widget.dart';
 
 class ProfileCard extends StatelessWidget {
   final bool isFront;
