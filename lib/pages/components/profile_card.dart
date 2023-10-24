@@ -20,8 +20,13 @@ class ProfileCard extends StatelessWidget {
     return isFront
         ? SwipeWidget(
             onSlided: onSlided,
-            child: SwipeCard(url: url, name: name),
+            url: url,
+            name: name,
           )
-        : SwipeCard(url: url, name: name);
+        : SwipeCard(
+            url: url,
+            name: name,
+            onClick: (_) async {},
+          );
   }
 }

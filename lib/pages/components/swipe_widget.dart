@@ -2,11 +2,18 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class SwipeWidget extends StatefulWidget {
-  final Widget child;
-  final Future<void> Function(bool) onSlided;
+import 'package:valley_challenge/pages/components/swipe_card.dart';
 
-  const SwipeWidget({super.key, required this.child, required this.onSlided});
+class SwipeWidget extends StatefulWidget {
+  final Future<void> Function(bool) onSlided;
+  final String name;
+  final String url;
+
+  const SwipeWidget(
+      {super.key,
+      required this.onSlided,
+      required this.url,
+      required this.name});
 
   @override
   State<SwipeWidget> createState() => _SwipeWidgetState();
@@ -33,20 +40,14 @@ class _SwipeWidgetState extends State<SwipeWidget> {
 
   Future<void> onDragEnd(DragEndDetails details, Size screenSize) async {
     if (position.dx > threshold) {
-      setState(() {
-        dragging = false;
-        position += Offset(2 * screenSize.width, 0);
-        angle = 20;
-      });
-      await widget.onSlided(true);
+      await likeAnimation(screenSize);
     } else if (position.dx.abs() > threshold) {
-      setState(() {
-        dragging = false;
-        position += Offset(2 * -screenSize.width, 0);
-        angle = -20;
-      });
-      await widget.onSlided(false);
+      await dislikeAnimation(screenSize);
     }
+    reset();
+  }
+
+  void reset() {
     setState(() {
       dragging = false;
       position = Offset.zero;
@@ -54,14 +55,39 @@ class _SwipeWidgetState extends State<SwipeWidget> {
     });
   }
 
+  Future<void> likeAnimation(Size screenSize) async {
+    setState(() {
+      dragging = false;
+      position += Offset(2 * screenSize.width, 0);
+      angle = 20;
+    });
+    await widget.onSlided(true);
+  }
+
+  Future<void> dislikeAnimation(Size screenSize) async {
+    setState(() {
+      dragging = false;
+      position += Offset(2 * -screenSize.width, 0);
+      angle = -20;
+    });
+    await widget.onSlided(false);
+  }
+
+  Future<void> onClick(bool like, Size screenSize) async {
+    if (like) {
+      likeAnimation(screenSize);
+    } else {
+      dislikeAnimation(screenSize);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    late final size = MediaQuery.of(context).size;
     return GestureDetector(
         onHorizontalDragStart: onDragStart,
-        onHorizontalDragUpdate: (details) =>
-            onDragUpdate(details, MediaQuery.of(context).size),
-        onHorizontalDragEnd: (details) =>
-            onDragEnd(details, MediaQuery.of(context).size),
+        onHorizontalDragUpdate: (details) => onDragUpdate(details, size),
+        onHorizontalDragEnd: (details) => onDragEnd(details, size),
         child: LayoutBuilder(builder: (context, constraints) {
           final center = constraints.smallest.center(Offset.zero);
           final rotatedMatrix = Matrix4.identity()
@@ -73,7 +99,11 @@ class _SwipeWidgetState extends State<SwipeWidget> {
               curve: Curves.easeInOut,
               duration: Duration(milliseconds: animationDuration),
               transform: rotatedMatrix..translate(position.dx, position.dy),
-              child: widget.child);
+              child: SwipeCard(
+                url: widget.url,
+                name: widget.name,
+                onClick: (like) => onClick(like, size),
+              ));
         }));
   }
 }

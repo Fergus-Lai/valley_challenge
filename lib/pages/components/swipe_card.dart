@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class SwipeCard extends StatelessWidget {
   final String url;
   final String name;
-  const SwipeCard({super.key, required this.url, required this.name});
+  final Future<void> Function(bool) onClick;
+  const SwipeCard(
+      {super.key,
+      required this.url,
+      required this.name,
+      required this.onClick});
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
@@ -45,13 +50,13 @@ class SwipeCard extends StatelessWidget {
                           style: const ButtonStyle(
                               backgroundColor:
                                   MaterialStatePropertyAll(Colors.white)),
-                          onPressed: () {},
+                          onPressed: () => onClick(false),
                           icon: Icon(Icons.close, color: Colors.red.shade900)),
                       IconButton.filled(
                           style: const ButtonStyle(
                               backgroundColor:
                                   MaterialStatePropertyAll(Colors.white)),
-                          onPressed: () {},
+                          onPressed: () => onClick(true),
                           icon: Icon(Icons.favorite,
                               color: Colors.green.shade400))
                     ],
