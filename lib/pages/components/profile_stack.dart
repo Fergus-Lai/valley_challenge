@@ -24,7 +24,8 @@ class _ProfileStackState extends State<ProfileStack> {
               },
               isFront: widget.data.last["image"] ==
                   profile["image"], // FLutter Display Last First
-              url: profile["image"]))
+              url: profile["image"],
+              name: profile["name"]))
           .toList(),
     );
   }
