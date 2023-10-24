@@ -16,7 +16,7 @@ class NavPageState extends State<NavPage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> _pages = <Widget>[
-      const HomePage(),
+      HomePage(user: widget.user),
       ProfilePage(user: widget.user)
     ];
     return Scaffold(

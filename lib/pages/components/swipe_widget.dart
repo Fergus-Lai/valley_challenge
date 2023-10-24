@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class SwipeWidget extends StatefulWidget {
   final Widget child;
-  final void Function(bool) onSlided;
+  final Future<void> Function(bool) onSlided;
 
   const SwipeWidget({super.key, required this.child, required this.onSlided});
 
@@ -31,7 +31,22 @@ class _SwipeWidgetState extends State<SwipeWidget> {
     });
   }
 
-  void onDragEnd(DragEndDetails details) {
+  Future<void> onDragEnd(DragEndDetails details, Size screenSize) async {
+    if (position.dx > threshold) {
+      setState(() {
+        dragging = false;
+        position += Offset(2 * screenSize.width, 0);
+        angle = 20;
+      });
+      await widget.onSlided(true);
+    } else if (position.dx.abs() > threshold) {
+      setState(() {
+        dragging = false;
+        position += Offset(2 * -screenSize.width, 0);
+        angle = -20;
+      });
+      await widget.onSlided(false);
+    }
     setState(() {
       dragging = false;
       position = Offset.zero;
@@ -45,7 +60,8 @@ class _SwipeWidgetState extends State<SwipeWidget> {
         onHorizontalDragStart: onDragStart,
         onHorizontalDragUpdate: (details) =>
             onDragUpdate(details, MediaQuery.of(context).size),
-        onHorizontalDragEnd: onDragEnd,
+        onHorizontalDragEnd: (details) =>
+            onDragEnd(details, MediaQuery.of(context).size),
         child: LayoutBuilder(builder: (context, constraints) {
           final center = constraints.smallest.center(Offset.zero);
           final rotatedMatrix = Matrix4.identity()
