@@ -22,15 +22,17 @@ class HomePageState extends State<HomePage> {
           alignment: Alignment.center,
           padding: const EdgeInsets.all(16),
           child: FutureBuilder(
-              future: cardReference.get(),
+              future: cardReference.get(), // Get Cards
               builder: (context, snapshot) {
+                // Show Cards If Loaded
                 if (snapshot.hasData) {
                   return ProfileStack(
                       data: snapshot.data!.docs
                           .map((doc) => doc.data())
                           .toList());
                 } else {
-                  return Text("Loading");
+                  // Show Loading Indicator
+                  return const CircularProgressIndicator();
                 }
               }),
         ),

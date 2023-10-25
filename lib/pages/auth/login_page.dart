@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:valley_challenge/components/color_button.dart';
 
 class LoginPage extends StatefulWidget {
   final Function() onTap;
@@ -71,6 +72,7 @@ class LoginPageState extends State<LoginPage> {
                       errorText: emailError),
                 ),
                 const SizedBox(height: 8),
+                // Password Field
                 TextField(
                   obscureText: true,
                   controller: passwordController,
@@ -83,20 +85,14 @@ class LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
+                // Switch To Create Account Page
                 TextButton(
                     onPressed: widget.onTap,
                     child: const Text("Create an Account")),
                 const SizedBox(height: 8),
-                ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: disabled()
-                          ? const MaterialStatePropertyAll(Colors.grey)
-                          : const MaterialStatePropertyAll(Colors.purple),
-                      foregroundColor:
-                          const MaterialStatePropertyAll(Colors.white)),
-                  onPressed: disabled() ? null : signIn,
-                  child: const Text("Sign In"),
-                ),
+                // Sign In Button
+                ColorButton(
+                    disabled: disabled(), onClick: signIn, text: "Sign In")
               ],
             )));
   }

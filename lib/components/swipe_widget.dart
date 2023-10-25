@@ -36,14 +36,17 @@ class _SwipeWidgetState extends State<SwipeWidget> {
 
   void onDragUpdate(DragUpdateDetails details, Size screenSize) {
     setState(() {
+      // Calculate Positon of Card
       position += details.delta;
       angle = 45 * position.dx / screenSize.width;
     });
   }
 
   Future<void> onDragEnd(DragEndDetails details, Size screenSize) async {
+    // If it passes threshold to the right (Like)
     if (position.dx > threshold) {
       await likeAnimation(screenSize);
+      // If it passes threshold to the left (Dislike)
     } else if (position.dx.abs() > threshold) {
       await dislikeAnimation(screenSize);
     }
@@ -86,6 +89,7 @@ class _SwipeWidgetState extends State<SwipeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // Query Size of Screen
     late final size = MediaQuery.of(context).size;
     return GestureDetector(
         onHorizontalDragStart: onDragStart,
@@ -93,14 +97,17 @@ class _SwipeWidgetState extends State<SwipeWidget> {
         onHorizontalDragEnd: (details) => onDragEnd(details, size),
         child: LayoutBuilder(builder: (context, constraints) {
           final center = constraints.smallest.center(Offset.zero);
+          // Rotate Matrix From The Center
           final rotatedMatrix = Matrix4.identity()
             ..translate(center.dx, center.dy)
             ..rotateZ(angle * pi / 180)
             ..translate(-center.dx, -center.dy);
+          // Disable Animation if Dragging
           final animationDuration = dragging ? 0 : 400;
           return AnimatedContainer(
               curve: Curves.easeInOut,
               duration: Duration(milliseconds: animationDuration),
+              // Translate Card Based On The Position
               transform: rotatedMatrix..translate(position.dx, position.dy),
               child: widget.ads
                   ? AdCard(onClick: (like) => onClick(like, size))

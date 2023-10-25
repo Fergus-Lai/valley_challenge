@@ -11,16 +11,18 @@ class NavPage extends StatefulWidget {
   State<NavPage> createState() => NavPageState();
 }
 
+// Page for main app for user to naviage between profile and home using bottom nav bar
+
 class NavPageState extends State<NavPage> {
   int index = 0;
   @override
   Widget build(BuildContext context) {
-    List<Widget> _pages = <Widget>[
+    List<Widget> pages = <Widget>[
       HomePage(user: widget.user),
       ProfilePage(user: widget.user)
     ];
     return Scaffold(
-        body: _pages.elementAt(index),
+        body: pages.elementAt(index),
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),

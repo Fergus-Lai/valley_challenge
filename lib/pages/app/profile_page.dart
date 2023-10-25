@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:valley_challenge/components/color_button.dart';
 import 'package:valley_challenge/components/dev_checkbox.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -50,10 +51,12 @@ class ProfilePageState extends State<ProfilePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Welcome Text
           Text(
             "Welcome Back ${developer ? "Developer" : "Founder"}",
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
+          // Name Row
           Row(
             children: [
               Flexible(
@@ -77,13 +80,13 @@ class ProfilePageState extends State<ProfilePage> {
                   child: Icon(nameEdit ? Icons.save : Icons.edit, size: 40))
             ],
           ),
+          // Change Role
           DevCheckBox(developer: developer, onChanged: onChanged),
-          ElevatedButton(
-              style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.purple),
-                  foregroundColor: MaterialStatePropertyAll(Colors.white)),
-              onPressed: FirebaseAuth.instance.signOut,
-              child: const Text("Sign Out"))
+          // Sign Out
+          ColorButton(
+              disabled: false,
+              onClick: FirebaseAuth.instance.signOut,
+              text: "Sign Out")
         ],
       ),
     ));

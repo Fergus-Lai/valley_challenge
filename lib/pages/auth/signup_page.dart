@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:valley_challenge/components/color_button.dart';
 
 class SignUpException implements Exception {
   String code;
@@ -97,10 +98,12 @@ class SignupPageState extends State<SignupPage> {
                       errorText: emailError),
                 ),
                 const SizedBox(height: 8),
+                // Password Field
                 TextField(
                   obscureText: true,
                   controller: passwordController,
                   onSubmitted: (input) {
+                    // Check If Password is Same
                     if (input.isNotEmpty &&
                         confirmPasswordController.text.isNotEmpty &&
                         confirmPasswordController.text != input) {
@@ -119,10 +122,12 @@ class SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
+                // Confirm Password Field
                 TextField(
                   obscureText: true,
                   controller: confirmPasswordController,
                   onSubmitted: (input) {
+                    // Check If Password is Same
                     if (input.isNotEmpty &&
                         passwordController.text.isNotEmpty &&
                         passwordController.text != input) {
@@ -138,20 +143,14 @@ class SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
+                // Switch To Login Page
                 TextButton(
                     onPressed: widget.onTap,
-                    child: const Text("Create an Account")),
+                    child: const Text("Already Have An Account?")),
                 const SizedBox(height: 8),
-                ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: disabled()
-                          ? const MaterialStatePropertyAll(Colors.grey)
-                          : const MaterialStatePropertyAll(Colors.purple),
-                      foregroundColor:
-                          const MaterialStatePropertyAll(Colors.white)),
-                  onPressed: disabled() ? null : signUp,
-                  child: const Text("Sign Up"),
-                ),
+                // Sign Up Button
+                ColorButton(
+                    disabled: disabled(), onClick: signUp, text: "Sign Up")
               ],
             )));
   }

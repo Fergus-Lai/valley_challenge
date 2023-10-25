@@ -15,9 +15,11 @@ class _ProfileStackState extends State<ProfileStack> {
   @override
   void initState() {
     super.initState();
-    final x = widget.data;
-    x.shuffle();
-    for (final profile in x) {
+    // Shuffle The Cards
+    widget.data.shuffle();
+    // Fill the list
+    for (final profile in widget.data) {
+      // Add ad card first if the next card is the 10th card
       if (profiles.isNotEmpty && (profiles.length % 9 == 0)) {
         profiles.add(SwipeWidget(
           onSlided: (like) async {
@@ -30,6 +32,7 @@ class _ProfileStackState extends State<ProfileStack> {
           ads: true,
         ));
       }
+      // Add card
       profiles.add(SwipeWidget(
         onSlided: (like) async {
           await Future.delayed(const Duration(milliseconds: 200));
@@ -41,6 +44,7 @@ class _ProfileStackState extends State<ProfileStack> {
         name: profile["name"],
       ));
     }
+    // Last Card
     profiles.add(BaseCard(
         child: Container(
             alignment: Alignment.center,
@@ -52,6 +56,7 @@ class _ProfileStackState extends State<ProfileStack> {
                   fontWeight: FontWeight.bold,
                   fontSize: 32),
             ))));
+    // Reverse the profiles as Stack consume the list in reverse
     profiles = profiles.reversed.toList();
   }
 

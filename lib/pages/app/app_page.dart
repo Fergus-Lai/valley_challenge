@@ -11,16 +11,21 @@ class AppPage extends StatelessWidget {
     BuildContext context,
   ) {
     return StreamBuilder(
+        // Read Constantly If The Users Have Data
         stream: FirebaseFirestore.instance
             .collection("users")
             .doc(FirebaseAuth.instance.currentUser?.email)
             .snapshots(),
         builder: (context,
             AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
+          // Main App If User Have Data
           if (snapshot.hasData && snapshot.data!.exists) {
             return NavPage(user: snapshot.data!);
-          } else {
+          } else if (snapshot.connectionState == "done") {
+            // Ask User To Fill In Data
             return const DataPage();
+          } else {
+            return const CircularProgressIndicator();
           }
         });
   }

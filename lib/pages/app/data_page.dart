@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:valley_challenge/components/color_button.dart';
 import 'package:valley_challenge/components/dev_checkbox.dart';
 
 class DataPage extends StatefulWidget {
@@ -44,6 +45,11 @@ class DataPageState extends State<DataPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Text(
+                "Please Enter Your Data",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              // Name Field
               TextField(
                 controller: nameController,
                 onChanged: (value) {
@@ -63,19 +69,12 @@ class DataPageState extends State<DataPage> {
                     errorText: nameError),
               ),
               const SizedBox(height: 8),
+              // Change Role
               DevCheckBox(developer: developer, onChanged: onChanged),
               const SizedBox(height: 8),
-              ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: disable()
-                          ? const MaterialStatePropertyAll(Colors.grey)
-                          : const MaterialStatePropertyAll(Colors.purple),
-                      foregroundColor:
-                          const MaterialStatePropertyAll(Colors.white)),
-                  onPressed: disable() ? null : confirmPressed,
-                  child: const Center(
-                    child: (Text("Confirm")),
-                  ))
+              // Save
+              ColorButton(
+                  disabled: disable(), onClick: confirmPressed, text: "Confirm")
             ],
           )),
     );
