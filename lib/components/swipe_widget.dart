@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:valley_challenge/components/ad_card.dart';
-
 import 'package:valley_challenge/components/swipe_card.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SwipeWidget extends StatefulWidget {
   final Future<void> Function(bool) onSlided;
@@ -62,11 +62,20 @@ class _SwipeWidgetState extends State<SwipeWidget> {
   }
 
   Future<void> likeAnimation(Size screenSize) async {
+    Fluttertoast.cancel();
     setState(() {
       dragging = false;
       position += Offset(2 * screenSize.width, 0);
       angle = 20;
     });
+    Fluttertoast.showToast(
+        msg: "Liked",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0);
     await widget.onSlided(true);
   }
 
@@ -76,10 +85,20 @@ class _SwipeWidgetState extends State<SwipeWidget> {
       position += Offset(2 * -screenSize.width, 0);
       angle = -20;
     });
+    Fluttertoast.showToast(
+        msg: "Disliked",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
     await widget.onSlided(false);
   }
 
   Future<void> onClick(bool like, Size screenSize) async {
+    Fluttertoast.cancel();
+    await Future.delayed(const Duration(milliseconds: 200));
     if (like) {
       likeAnimation(screenSize);
     } else {
