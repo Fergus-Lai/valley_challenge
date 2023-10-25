@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:valley_challenge/components/ad_card.dart';
 
 import 'package:valley_challenge/components/swipe_card.dart';
 
@@ -8,12 +9,14 @@ class SwipeWidget extends StatefulWidget {
   final Future<void> Function(bool) onSlided;
   final String name;
   final String url;
+  final bool ads;
 
   const SwipeWidget(
       {super.key,
       required this.onSlided,
-      required this.url,
-      required this.name});
+      this.url = "",
+      required this.name,
+      this.ads = false});
 
   @override
   State<SwipeWidget> createState() => _SwipeWidgetState();
@@ -99,11 +102,13 @@ class _SwipeWidgetState extends State<SwipeWidget> {
               curve: Curves.easeInOut,
               duration: Duration(milliseconds: animationDuration),
               transform: rotatedMatrix..translate(position.dx, position.dy),
-              child: SwipeCard(
-                url: widget.url,
-                name: widget.name,
-                onClick: (like) => onClick(like, size),
-              ));
+              child: widget.ads
+                  ? AdCard(onClick: (like) => onClick(like, size))
+                  : SwipeCard(
+                      url: widget.url,
+                      name: widget.name,
+                      onClick: (like) => onClick(like, size),
+                    ));
         }));
   }
 }
