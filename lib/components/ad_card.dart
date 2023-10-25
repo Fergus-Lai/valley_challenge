@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:valley_challenge/components/base_card.dart';
-import 'package:valley_challenge/components/button_row.dart';
 import 'package:valley_challenge/components/description_bar.dart';
 
 class AdCard extends StatelessWidget {
